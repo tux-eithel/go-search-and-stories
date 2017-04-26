@@ -1,6 +1,7 @@
 package main
 
 type (
+	// feed is a struct for sourcesURL
 	feed struct {
 		ID       string `json:"id"`
 		Title    string `json:"title"`
@@ -9,6 +10,7 @@ type (
 		Link     string `json:"link"`
 	}
 
+	// news is a struct for mainFeedURL
 	news struct {
 		Feed     string `json:"feed"`
 		Icon     string `json:"favicon"`
