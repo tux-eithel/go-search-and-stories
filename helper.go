@@ -22,3 +22,18 @@ func filterSources(inputURL string, listSources []string) *url.URL {
 	currentURL.RawQuery = params.Encode()
 	return currentURL
 }
+
+func feedByCategory(feeds []*feed) map[string][]*feed {
+
+	orderedFeed := make(map[string][]*feed, 0)
+
+	for _, currentFeed := range feeds {
+		if _, ok := orderedFeed[currentFeed.Category]; !ok {
+			orderedFeed[currentFeed.Category] = make([]*feed, 0)
+		}
+		orderedFeed[currentFeed.Category] = append(orderedFeed[currentFeed.Category], currentFeed)
+	}
+
+	return orderedFeed
+
+}
