@@ -50,6 +50,9 @@ func fillTemplate() []*routeTemplate {
 		for _, str := range tmpl.fileNames {
 			if t == nil {
 				t = template.New(tmpl.routeName)
+				t.Funcs(template.FuncMap{
+					"inarray": inArray,
+				})
 			}
 			t, err = t.Parse(str)
 			if err != nil {
@@ -61,4 +64,13 @@ func fillTemplate() []*routeTemplate {
 	}
 
 	return rTemplates
+}
+
+func inArray(input []string, str string) bool {
+	for _, current := range input {
+		if current == str {
+			return true
+		}
+	}
+	return false
 }
