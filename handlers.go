@@ -26,6 +26,7 @@ func indexSettings(rt *routeTemplate, w http.ResponseWriter, r *http.Request) {
 
 	var err error
 	var list []*feed
+	var listByCat map[string][]*feed
 
 	if r.Method == "POST" {
 		err = r.ParseForm()
@@ -38,10 +39,14 @@ func indexSettings(rt *routeTemplate, w http.ResponseWriter, r *http.Request) {
 		list, err = getSources(sourcesURL)
 	}
 
+	if err == nil {
+		listByCat = feedByCategory(list)
+	}
+
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	if rt.tmpl != nil {
 		rt.tmpl.Execute(w, map[string]interface{}{
-			"sources":   list,
+			"sources":   listByCat,
 			"error":     err,
 			"mysources": preferSources,
 		})
