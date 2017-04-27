@@ -2,6 +2,10 @@ package main
 
 import "net/url"
 import "strings"
+import "os"
+import "log"
+import "io/ioutil"
+import "encoding/json"
 
 // filterSources add listSources ids to query string.
 // The ids will be added to "s" param.
@@ -35,5 +39,46 @@ func feedByCategory(feeds []*feed) map[string][]*feed {
 	}
 
 	return orderedFeed
+
+}
+
+func loadSettings(filname string) *preference {
+	file, err := os.Open(filname)
+	if err != nil {
+		log.Println("Unable to open setting file", filname)
+		return &preference{}
+	}
+	defer file.Close()
+
+	data, err := ioutil.ReadAll(file)
+	if err != nil {
+		log.Println("Unable to read setting file", err)
+		return &preference{}
+	}
+
+	p := &preference{}
+	json.Unmarshal(data, p)
+	if err != nil {
+		log.Println("Unable to parse the json", err)
+		return &preference{}
+	}
+	return p
+
+}
+
+func saveSettings(filename string, p *preference) bool {
+
+	data, err := json.Marshal(p)
+	if err != nil {
+		log.Println("Unable to marshal settings", err)
+		return false
+	}
+
+	err = ioutil.WriteFile(filename, data, 0600)
+	if err != nil {
+		log.Println("Unable to save the settings", err)
+		return false
+	}
+	return true
 
 }
