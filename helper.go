@@ -1,11 +1,14 @@
 package main
 
-import "net/url"
-import "strings"
-import "os"
-import "log"
-import "io/ioutil"
-import "encoding/json"
+import (
+	"encoding/json"
+	"io/ioutil"
+	"log"
+	"net/url"
+	"os"
+	"os/user"
+	"strings"
+)
 
 // filterSources add listSources ids to query string.
 // The ids will be added to "s" param.
@@ -42,31 +45,49 @@ func feedByCategory(feeds []*feed) map[string][]*feed {
 
 }
 
-func loadSettings(filname string) *preference {
-	file, err := os.Open(filname)
+func loadSettings(filename string) *preference {
+
+	p := &preference{}
+
+	user, err := user.Current()
 	if err != nil {
-		log.Println("Unable to open setting file", filname)
-		return &preference{}
+		log.Println("Unable to determinate the home directory", err)
+		return p
+	}
+
+	filename = strings.Join([]string{user.HomeDir, filename}, string(os.PathSeparator))
+
+	file, err := os.Open(filename)
+	if err != nil {
+		log.Println("Unable to open setting file", filename)
+		return p
 	}
 	defer file.Close()
 
 	data, err := ioutil.ReadAll(file)
 	if err != nil {
 		log.Println("Unable to read setting file", err)
-		return &preference{}
+		return p
 	}
 
-	p := &preference{}
 	json.Unmarshal(data, p)
 	if err != nil {
 		log.Println("Unable to parse the json", err)
-		return &preference{}
+		return p
 	}
 	return p
 
 }
 
 func saveSettings(filename string, p *preference) bool {
+
+	user, err := user.Current()
+	if err != nil {
+		log.Println("Unable to determinate the home directory", err)
+		return false
+	}
+
+	filename = strings.Join([]string{user.HomeDir, filename}, string(os.PathSeparator))
 
 	data, err := json.Marshal(p)
 	if err != nil {
