@@ -10,7 +10,7 @@ const (
     	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-		<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.red-light_blue.min.css" /> 
+		 <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.red-deep_orange.min.css" /> 
 		<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
 		<title>DuckDuckGo - Search and Stories</title>
@@ -18,14 +18,25 @@ const (
 		
 		<style>
 			.demo-card-wide.mdl-card {
-			width: 512px;
+				width: 512px;
 			}
 			.demo-card-wide > .mdl-card__title {
 				color: #fff;
 				height: 176px;
 			}
 			.demo-card-wide > .mdl-card__menu {
-			color: #fff;
+				color: #fff;
+			}
+
+			.demo-card-square.mdl-card {
+				width: 260px;
+				height: 290px;
+			}
+			.demo-card-square > .mdl-card__title {
+				color: #fff;
+			}
+			.mdl-card__action--larger {
+				font-size: 20px;
 			}
 		</style>
 
@@ -75,8 +86,8 @@ const (
 					<div class="mdl-card__supporting-text">
 						{{ .Title }}
 					</div>
-					<div class="mdl-card__actions mdl-card--border">
-						<a target="_blank" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{ .URL }}">
+					<div class="mdl-card__actions mdl-card--border" style="background: url('{{ .Icon }}') right no-repeat; background-size: 9% auto;">
+						<a target="_blank" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect article-button" href="{{ .URL }}">
 						Read Article
 						</a>
 					</div>
@@ -115,12 +126,27 @@ const (
 				</div>
 				{{ range  $cat, $feed := . }}
 					<div class="mdl-tabs__panel {{ if eq $cat "Answers" }}is-active{{ end }}" id="{{ validid $cat }}">
-						{{ range $feed }}
-						<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="source_{{ .ID }}">
-							<input name="sources" value="{{ .ID }}" type="checkbox" id="source_{{ .ID }}" class="mdl-switch__input" {{ with inarray $mysources .ID }}checked{{ end }}>
-							<span class="mdl-switch__label">{{ .Title }}</span>
-						</label>
-					{{ end }}
+						<div class="mdl-grid">
+							{{ range $feed }}
+								<div class="mdl-cell mdl-cell--3-col">
+									<div class="demo-card-square mdl-card mdl-shadow--2dp">
+										<div class="mdl-card__title mdl-card--expand" style="background: url('{{ .Image }}') top 10% left 5% no-repeat #607D8B">
+											<h2 class="mdl-card__title-text">{{ .Title }}</h2>
+										</div>
+										<div class="mdl-card__supporting-text">
+											{{ .Description }}
+										</div>
+										<div class="mdl-card__actions mdl-card--border mdl-card__action--larger">
+											<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="source_{{ .ID }}">
+												<input name="sources" value="{{ .ID }}" type="checkbox" id="source_{{ .ID }}" class="mdl-switch__input" {{ with inarray $mysources .ID }}checked{{ end }}>
+												<span class="mdl-switch__label"></span>
+											</label>
+										</div>
+									</div>
+								</div>
+							
+							{{ end }}
+						</div>	
 					</div>
 				{{ end }}
 			</div>
