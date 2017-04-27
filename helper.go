@@ -13,7 +13,7 @@ func filterSources(inputURL string, listSources []string) *url.URL {
 		return nil
 	}
 
-	if listSources == nil {
+	if listSources == nil || len(listSources) == 0 {
 		return currentURL
 	}
 
