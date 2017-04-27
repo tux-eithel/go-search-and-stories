@@ -110,7 +110,7 @@ const (
 			<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
 				<div class="mdl-tabs__tab-bar">
 					{{ range $cat, $feed := . }}
-					<a href="#{{ validid $cat }}" class="mdl-tabs__tab {{ if eq $cat "Answers" }}is-active{{ end }}">{{ $cat }}</a>
+						<a href="#{{ validid $cat }}" class="mdl-tabs__tab {{ if eq $cat "Answers" }}is-active{{ end }}">{{ $cat }}</a>
 					{{ end }}
 				</div>
 				{{ range  $cat, $feed := . }}
@@ -124,7 +124,13 @@ const (
 					</div>
 				{{ end }}
 			</div>
-		<input type="submit" value="Save Settings" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"/>
+			<div class="mdl-grid">
+  				<div class="mdl-cell mdl-cell--4-col"></div>
+  				<div class="mdl-cell mdl-cell--4-col">
+					<input type="submit" value="Save Settings" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"/>
+				</div>
+  				<div class="mdl-cell mdl-cell--4-col"></div>
+			</div>
 		</form>
 	{{ end }}
 
