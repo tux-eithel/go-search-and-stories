@@ -10,6 +10,10 @@ const (
 	sourcesURL  = "https://watrcoolr.duckduckgo.com/watrcoolr.js?o=json&type_info=1"
 )
 
+var (
+	preferSources []string
+)
+
 func main() {
 
 	routeTemplates := fillTemplate()
