@@ -4,7 +4,7 @@ import "net/http"
 
 func indexHandler(rt *routeTemplate, w http.ResponseWriter, r *http.Request) {
 
-	preparedURL := filterSources(mainFeedURL, preferSources)
+	preparedURL := filterSources(mainFeedURL, preferSources.Sources)
 
 	var list []*news
 	var err error
@@ -31,7 +31,8 @@ func indexSettings(rt *routeTemplate, w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		err = r.ParseForm()
 		if err == nil {
-			preferSources = r.Form["sources"]
+			preferSources.Sources = r.Form["sources"]
+			saveSettings(settingsFileName, preferSources)
 		}
 	}
 
@@ -48,7 +49,7 @@ func indexSettings(rt *routeTemplate, w http.ResponseWriter, r *http.Request) {
 		rt.tmpl.Execute(w, map[string]interface{}{
 			"sources":   listByCat,
 			"error":     err,
-			"mysources": preferSources,
+			"mysources": preferSources.Sources,
 		})
 	}
 }
