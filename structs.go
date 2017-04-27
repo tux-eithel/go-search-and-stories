@@ -3,11 +3,12 @@ package main
 type (
 	// feed is a struct for sourcesURL
 	feed struct {
-		ID       string `json:"id"`
-		Title    string `json:"title"`
-		Image    string `json:"image"`
-		Category string `json:"category"`
-		Link     string `json:"link"`
+		ID          string `json:"id"`
+		Title       string `json:"title"`
+		Image       string `json:"image"`
+		Category    string `json:"category"`
+		Link        string `json:"link"`
+		Description string `json:"description"`
 	}
 
 	// news is a struct for mainFeedURL
