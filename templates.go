@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"strings"
 )
 
 type (
@@ -52,6 +53,7 @@ func fillTemplate() []*routeTemplate {
 				t = template.New(tmpl.routeName)
 				t.Funcs(template.FuncMap{
 					"inarray": inArray,
+					"validid": validID,
 				})
 			}
 			t, err = t.Parse(str)
@@ -73,4 +75,9 @@ func inArray(input []string, str string) bool {
 		}
 	}
 	return false
+}
+
+func validID(str string) string {
+	localStr := strings.ToLower(str)
+	return strings.Replace(localStr, " ", "-", -1)
 }
