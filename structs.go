@@ -17,7 +17,7 @@ type (
 		Icon     string `json:"favicon"`
 		Image    string `json:"image"`
 		Type     string `json:"type"`
-		Proof    int    `json:"proof"`
+		Proof    int    `json:"-"`
 		URL      string `json:"url"`
 		Title    string `json:"title"`
 		Category string `json:"category"`
