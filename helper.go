@@ -7,6 +7,7 @@ import (
 	"net/url"
 	"os"
 	"os/user"
+	"sort"
 	"strings"
 )
 
@@ -42,6 +43,21 @@ func feedByCategory(feeds []*feed) map[string][]*feed {
 	}
 
 	return orderedFeed
+
+}
+
+func orderFeedByName(feeds map[string][]*feed) map[string][]*feed {
+
+	sortedFeeds := make(map[string][]*feed, len(feeds))
+
+	for index, value := range feeds {
+		sort.Slice(value, func(i, j int) bool {
+			return value[i].Title < value[j].Title
+		})
+		sortedFeeds[index] = value
+	}
+
+	return sortedFeeds
 
 }
 
