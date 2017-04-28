@@ -90,6 +90,7 @@ const (
 						<a target="_blank" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect article-button" href="{{ .URL }}">
 						Read Article
 						</a>
+						<span class="mdl-card__supporting-text">{{ .Timestamp }}</span>
 					</div>
 				</div>
 			</div>
