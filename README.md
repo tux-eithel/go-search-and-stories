@@ -7,7 +7,7 @@ Why this web app?
 
 I really like the app from DuckDuckGo (https://duckduckgo.com/app), especially the part **Top Stories**, but I don't like to read them from my phone/tablet.
 
-So I've create this simple web app version to read the feed from my pc.
+So I've create this simple web app (still beta) version to read the feed from my pc.
 
 
 
