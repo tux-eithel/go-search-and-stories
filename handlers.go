@@ -42,6 +42,7 @@ func indexSettings(rt *routeTemplate, w http.ResponseWriter, r *http.Request) {
 
 	if err == nil {
 		listByCat = feedByCategory(list)
+		listByCat = orderFeedByName(listByCat)
 	}
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
