@@ -30,6 +30,16 @@ go get -u github.com/tux-eithel/go-search-and-stories
 
 
 
+### CLI options
+```
+-p int
+    	listen server port (default 8080)
+-t	bool
+    use html filse instead of compiled templates (default false)
+```
+
+
+
 ## Usage
 
 Run the server `go-search-and-stories` and visit http://localhost:8080
@@ -50,6 +60,14 @@ Well... so when you do `go get ...` you will have an executable with all the stu
 
 
 
+## Theme Files
+
+Inside `templates` directory the are all the file used to render pages.
+
+Names **must** be keep it unchanged
+
+
+
 ## Why did you use Go to make this instead of X ?
 
 Well, it's the language I'm learning off-work, so that is!  
@@ -59,9 +77,8 @@ I'm learning also Dart and looking a bit of Rust, but it's too early to develop 
 
 ## In the next episodes....
 
-- [ ] Read theme form files
 - [ ] Save the last visited items
-- [ ] CLI settings: port number, configuration file
+- [ ] CLI settings: configuration file
 - [ ] Import/Export settings
 - [ ] Sync settings using someone else's computer (a.k.a **cloud** services)
 - [ ] Encrypt setting file
