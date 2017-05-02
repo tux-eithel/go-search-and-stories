@@ -1,6 +1,7 @@
 package main
 
 import "net/http"
+import "log"
 
 func indexHandler(rt *routeTemplate, w http.ResponseWriter, r *http.Request) {
 
@@ -14,10 +15,13 @@ func indexHandler(rt *routeTemplate, w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	if rt.tmpl != nil {
-		rt.tmpl.Execute(w, map[string]interface{}{
+		err = rt.tmpl.Execute(w, map[string]interface{}{
 			"news":  list,
 			"error": err,
 		})
+		if err != nil {
+			log.Println(err)
+		}
 	}
 
 }
@@ -47,10 +51,13 @@ func indexSettings(rt *routeTemplate, w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	if rt.tmpl != nil {
-		rt.tmpl.Execute(w, map[string]interface{}{
+		err = rt.tmpl.Execute(w, map[string]interface{}{
 			"sources":   listByCat,
 			"error":     err,
 			"mysources": preferSources.Sources,
 		})
+		if err != nil {
+			log.Println(err)
+		}
 	}
 }
