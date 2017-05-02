@@ -50,7 +50,7 @@ Well... so when you do `go get ...` you will have an executable with all the stu
 
 
 
-## Why use go to make this instead of X ?
+## Why did you use Go to make this instead of X ?
 
 Well, it's the language I'm learning off-work, so that is!  
 I'm learning also Dart and looking a bit of Rust, but it's too early to develop with those languages.
