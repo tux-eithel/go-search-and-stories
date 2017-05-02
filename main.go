@@ -1,8 +1,10 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"net/http"
+	"os"
 )
 
 const (
@@ -20,15 +22,22 @@ type (
 
 var (
 	preferSources = &preference{}
+
+	flagUseTemplateFiles bool
 )
 
 func init() {
 	preferSources = loadSettings(settingsFileName)
+
+	flag.BoolVar(&flagUseTemplateFiles, "t", false, "use html filse instead of compiled templates")
 }
 
 func main() {
 
-	routeTemplates := fillTemplate()
+	flag.Parse()
+
+	templateFolder := "templates" + string(os.PathSeparator)
+	routeTemplates := fillTemplate(templateFolder, flagUseTemplateFiles)
 
 	for _, tmpl := range routeTemplates {
 		http.Handle("/"+tmpl.url, tmpl)
