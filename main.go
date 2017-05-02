@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strconv"
 )
 
 const (
@@ -24,17 +25,26 @@ var (
 	preferSources = &preference{}
 
 	flagUseTemplateFiles bool
+	flagPort             int
 )
 
 func init() {
 	preferSources = loadSettings(settingsFileName)
 
 	flag.BoolVar(&flagUseTemplateFiles, "t", false, "use html filse instead of compiled templates")
+	flag.IntVar(&flagPort, "p", 8080, "listen server port")
 }
 
 func main() {
 
 	flag.Parse()
+
+	if flagPort < 1 {
+		fmt.Println("port number must be > 0")
+		os.Exit(1)
+	}
+
+	flagPortStr := strconv.Itoa(flagPort)
 
 	templateFolder := "templates" + string(os.PathSeparator)
 	routeTemplates := fillTemplate(templateFolder, flagUseTemplateFiles)
@@ -43,8 +53,8 @@ func main() {
 		http.Handle("/"+tmpl.url, tmpl)
 	}
 
-	fmt.Println("open with browser: http://localhost:8080")
+	fmt.Println("open with browser: http://localhost:" + flagPortStr)
 
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":"+flagPortStr, nil)
 
 }
