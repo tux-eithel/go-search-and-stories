@@ -31,7 +31,7 @@ var (
 func init() {
 	preferSources = loadSettings(settingsFileName)
 
-	flag.BoolVar(&flagUseTemplateFiles, "t", false, "use html filse instead of compiled templates (default false)")
+	flag.BoolVar(&flagUseTemplateFiles, "t", false, "use html files instead of compiled templates (default false)")
 	flag.IntVar(&flagPort, "p", 8080, "listen server port")
 }
 

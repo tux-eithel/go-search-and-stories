@@ -34,8 +34,8 @@ go get -u github.com/tux-eithel/go-search-and-stories
 ```
 -p int
     	listen server port (default 8080)
--t	bool
-    use html filse instead of compiled templates (default false)
+-t
+    use html files instead of compiled templates (default false)
 ```
 
 
