@@ -42,13 +42,13 @@ go get -u github.com/tux-eithel/go-search-and-stories
 
 ## Usage
 
-Run the server `go-search-and-stories` and visit http://localhost:8080
+Run the server `go-search-and-stories` and visit http://localhost:8080 .
 
 
 
 ## Settings
 
-The app save the settings in your `$HOME` in a file called `.ddg_settings` in plain text.
+The app saves the settings in your `$HOME` in a file called `.ddg_settings` in plain text.
 
 
 
@@ -56,7 +56,7 @@ The app save the settings in your `$HOME` in a file called `.ddg_settings` in pl
 
 The html and css are inside the file `html_templates.go`... so I guess you are thinking *Why the fuck did he put the template thing inside a go file?!?*.
 
-Well... so when you do `go get ...` you will have an executable with all the stuff inside. In the future maybe I'm going to read external html file.
+Well... so when you do `go get ...` you will have an executable with all the stuff inside.
 
 
 
@@ -64,7 +64,7 @@ Well... so when you do `go get ...` you will have an executable with all the stu
 
 Inside `templates` directory the are all the file used to render pages.
 
-Names **must** be keep it unchanged
+Names **must** be keep it unchanged.
 
 
 
