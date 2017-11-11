@@ -65,13 +65,13 @@ func loadSettings(filename string) *preference {
 
 	p := &preference{}
 
-	user, err := user.Current()
+	tmpUser, err := user.Current()
 	if err != nil {
 		log.Println("Unable to determinate the home directory", err)
 		return p
 	}
 
-	filename = strings.Join([]string{user.HomeDir, filename}, string(os.PathSeparator))
+	filename = strings.Join([]string{tmpUser.HomeDir, filename}, string(os.PathSeparator))
 
 	file, err := os.Open(filename)
 	if err != nil {
@@ -97,13 +97,13 @@ func loadSettings(filename string) *preference {
 
 func saveSettings(filename string, p *preference) bool {
 
-	user, err := user.Current()
+	tmpUser, err := user.Current()
 	if err != nil {
 		log.Println("Unable to determinate the home directory", err)
 		return false
 	}
 
-	filename = strings.Join([]string{user.HomeDir, filename}, string(os.PathSeparator))
+	filename = strings.Join([]string{tmpUser.HomeDir, filename}, string(os.PathSeparator))
 
 	data, err := json.Marshal(p)
 	if err != nil {

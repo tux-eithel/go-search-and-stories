@@ -1,7 +1,9 @@
 package main
 
-import "net/http"
-import "log"
+import (
+	"log"
+	"net/http"
+)
 
 func indexHandler(rt *routeTemplate, w http.ResponseWriter, r *http.Request) {
 

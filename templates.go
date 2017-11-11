@@ -25,7 +25,7 @@ func (rt *routeTemplate) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 func fillTemplate(baseString string, useTemplateFiles bool) []*routeTemplate {
 
 	rTemplates := []*routeTemplate{
-		&routeTemplate{
+		{
 			routeName: "index",
 			url:       "",
 			fileNames: []string{
@@ -39,7 +39,7 @@ func fillTemplate(baseString string, useTemplateFiles bool) []*routeTemplate {
 			fnc: indexHandler,
 		},
 
-		&routeTemplate{
+		{
 			routeName: "settings",
 			url:       "settings",
 			fileNames: []string{
