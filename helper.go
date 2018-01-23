@@ -21,7 +21,7 @@ func filterSources(inputURL string, listSources []string) *url.URL {
 		return nil
 	}
 
-	if listSources == nil || len(listSources) == 0 {
+	if len(listSources) == 0 {
 		return currentURL
 	}
 
@@ -33,7 +33,7 @@ func filterSources(inputURL string, listSources []string) *url.URL {
 
 func feedByCategory(feeds []*feed) map[string][]*feed {
 
-	orderedFeed := make(map[string][]*feed, 0)
+	orderedFeed := make(map[string][]*feed)
 
 	for _, currentFeed := range feeds {
 		if _, ok := orderedFeed[currentFeed.Category]; !ok {
